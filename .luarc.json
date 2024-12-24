@@ -1,0 +1,14 @@
+{
+  "diagnostics.globals": [
+    "vim",
+    "MiniFiles",
+    "MiniVisits",
+    "MiniFuzzy",
+    "Snacks"
+  ],
+  "diagnostics.disable": ["missing-fields", "undefined-field"],
+  "Lua.format.defaultConfig": {
+    "indent_style": "space",
+    "indent_size": "2"
+  }
+}

@@ -1,0 +1,18 @@
+# Mac files
+*.DS_Store
+
+# backup files
+*.bak
+*.swp
+*.old
+
+# log files
+*.log
+.env
+
+sesstion.vim
+*.nvim
+
+.codeCompanion
+.avante_chat_history
+lua/lspconfig/
