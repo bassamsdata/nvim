@@ -98,7 +98,11 @@ return {
             end
           end),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if neocodeium.visible() then
+            -- This is for not to throw an error if neocodeium is not available
+            local ok, is_visible = pcall(function()
+              return neocodeium.visible()
+            end)
+            if ok and is_visible then
               neocodeium.accept()
             -- elseif cmp.visible() then
             --   cmp.select_next_item()
