@@ -15,15 +15,16 @@ local M = {
 
 function M.config()
   local servers = {
-    "r_language_server",
+    -- "r_language_server",
     "basedpyright",
     "lua_ls",
-    "html",
-    "cssls",
+    -- "html",
+    -- "cssls",
     "marksman",
     "taplo",
     "v_analyzer",
     "gopls",
+    "ruff",
   }
   require("mason").setup({
     ensure_installed = { "goimports", "gofumpt", "gomodifytags" },

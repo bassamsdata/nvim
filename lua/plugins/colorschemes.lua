@@ -186,6 +186,8 @@ return {
         -- Normal = { fg = "#e0def4", bg = "black" },
         NormalFloat = { link = "Normal" },
         FloatBorder = { link = "NonText" },
+        TermCursor = { link = "CurSearch" },
+        StatusLineTerm = { link = "Statusline" },
         -- Comment = { fg = "foam" },
         -- VertSplit = { fg = "muted", bg = "muted" },
         ["@variable"] = { fg = "text", italic = false },
@@ -297,6 +299,8 @@ return {
           RenderMarkdownCodeInline = { bg = "#2a2a37" },
           LspReferenceRead = { bg = "#3e4452" },
           LspReferenceWrite = { bold = true, underline = false, fg = "#dcd7ba" },
+          WinBar = { link = "NonText" }, -- more visible
+          TermCursor = { link = "Substitute" },
           -- LspReferenceText = { bg = "#3e4452" },
           -- LspReferenceWrite = { bg = "#3e4452" },
         }

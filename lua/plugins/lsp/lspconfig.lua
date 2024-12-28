@@ -209,16 +209,16 @@ return {
       -- Change the Diagnostic symbols in the sign column (gutter)
 
       -- configure html server
-      lspconfig["html"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- configure css server
-      lspconfig["cssls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
+      -- lspconfig["html"].setup({
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      -- })
+      --
+      -- -- configure css server
+      -- lspconfig["cssls"].setup({
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      -- })
       lspconfig["rust_analyzer"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
@@ -230,68 +230,70 @@ return {
       -- 	on_attach = on_attach,
       -- })
 
-      require("lspconfig").pylance.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = "basic",
-              deprecateTypingAliases = true,
-              diagnosticSeverityOverrides = {
-                reportDeprecated = "warning",
-                reportGeneralTypeIssues = "warning",
-                reportAttributeAccessIssue = "error",
-              },
-              inlayHints = {
-                variableTypes = true,
-                functionReturnTypes = true,
-                callArgumentNames = "partial",
-                pytestParameters = true,
-              },
-            },
-          },
-        },
-      })
+      -- require("lspconfig").pylance.setup({
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         typeCheckingMode = "basic",
+      --         deprecateTypingAliases = true,
+      --         diagnosticSeverityOverrides = {
+      --           reportDeprecated = "warning",
+      --           reportGeneralTypeIssues = "warning",
+      --           reportAttributeAccessIssue = "error",
+      --         },
+      --         inlayHints = {
+      --           variableTypes = true,
+      --           functionReturnTypes = true,
+      --           callArgumentNames = "partial",
+      --           pytestParameters = true,
+      --         },
+      --       },
+      --     },
+      --   },
+      -- })
 
       -- Find the root of a Python project, starting from file 'main.py'
       -- vim.fs.root(
       -- 	vim.fs.joinpath(vim.env.PWD, "main.py"),
       -- 	{ "pyproject.toml", "setup.py" }
       -- )
-      -- lspconfig["basedpyright"].setup({
-      --   capabilities = capabilities,
-      --   on_attach = on_attach,
-      --   settings = {
-      --     basedpyright = {
-      --       analysis = {
-      --         typeCheckingMode = "strict",
-      --         deprecateTypingAliases = true,
-      --         diagnosticSeverityOverrides = {
-      --           reportDeprecated = "warning",
-      --         },
-      --         inlayHints = {
-      --           variableTypes = true,
-      --           functionReturnTypes = true,
-      --           callArgumentNames = true,
-      --           -- pytestParameters = true,
-      --         },
-      --       },
-      --     },
-      --   },
-      --   --   -- TODO: add this and modify it
-      --   --   -- before_init = function(_, config)
-      --   --   -- 	local default_venv_path =
-      --   --   -- 		path.join(vim.env.HOME, "virtualenvs", "nvim-venv", "bin", "python")
-      --   --   -- 	config.settings.python.pythonPath = default_venv_path
-      --   --   -- end,
-      -- })
-      --
-      -- configure r langauge server
-      lspconfig["r_language_server"].setup({
+      lspconfig["basedpyright"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "strict",
+              deprecateTypingAliases = true,
+              diagnosticSeverityOverrides = {
+                reportDeprecated = "warning",
+              },
+              inlayHints = {
+                variableTypes = true,
+                functionReturnTypes = true,
+                callArgumentNames = true,
+                -- pytestParameters = true,
+              },
+            },
+          },
+        },
+        --   -- TODO: add this and modify it
+        --   -- before_init = function(_, config)
+        --   -- 	local default_venv_path =
+        --   -- 		path.join(vim.env.HOME, "virtualenvs", "nvim-venv", "bin", "python")
+        --   -- 	config.settings.python.pythonPath = default_venv_path
+        --   -- end,
       })
+      --
+      -- TODO: install R
+      -- configure r langauge server
+      -- lspconfig["r_language_server"].setup({
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      -- })
+
       lspconfig["taplo"].setup({
         capabilities = capabilities,
         on_attach = on_attach,

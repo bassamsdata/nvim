@@ -1,5 +1,7 @@
 local opt = vim.opt
-
+if vim.fn.has("nvim-0.10.3") then -- it has an issue with :Inspect command
+vim.hl = vim.highlight
+end
 -- stylua: ignore start 
 vim.g.mapleader      = " " -- set leader key to space
 vim.g.maplocalleader = "\\" -- we need to escabe \ with another \

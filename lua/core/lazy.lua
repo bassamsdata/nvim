@@ -49,7 +49,7 @@ require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } }, {
   },
   dev = {
     -- directory where you store your local plugin projects
-    path = "~/repos",
+    path = "~/repos/plugins/",
     ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
     patterns = { "bassamsdata" },
     fallback = false, -- Fallback to git when local plugin doesn't exist

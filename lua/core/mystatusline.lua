@@ -11,15 +11,21 @@ statusline.highlight_definitions = {}
 ---@param bold? boolean
 ---@return string
 function statusline.define_highlight(name, hl_or_color, color_type, bold)
-  local hl_name = "Statusline" .. name
+  assert(type(name) == "string", "name must be a string")
+  assert(type(hl_or_color) == "string", "hl_or_color must be a string")
+  assert(
+    color_type == nil or color_type == "bg" or color_type == "fg",
+    "color_type must be 'bg', 'fg' or nil"
+  )
 
+  local hl_name = "Statusline" .. name
+  -- Cache the highlight definition
   statusline.highlight_definitions[hl_name] = {
     name = name,
     hl_or_color = hl_or_color,
-    color_type = color_type,
-    bold = bold,
+    color_type = color_type or "fg", -- Default to fg
+    bold = bold or false, -- Default to false
   }
-  -- "#1f1f28"
   statusline.create_or_update_hl(hl_name, statusline.highlight_definitions[hl_name])
   return hl_name
 end
@@ -28,25 +34,22 @@ end
 function statusline.create_or_update_hl(hl_name, def)
   local bg_hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
   local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
-  local fg_color
-
-  if def.hl_or_color:sub(1, 1) == "#" then
-    fg_color = def.hl_or_color
-  else
-    local src_hl = vim.api.nvim_get_hl(0, { name = def.hl_or_color })
-    ---@diagnostic disable-next-line: undefined-field
-    if src_hl.link then -- handle highlight links
-      ---@diagnostic disable-next-line: undefined-field
-      src_hl = vim.api.nvim_get_hl(0, { name = src_hl.link })
+  -- Get the color, following highlight links if necessary
+  local function resolve_color(hl_name, color_type)
+    local hl = vim.api.nvim_get_hl(0, { name = hl_name })
+    while hl.link do
+      hl = vim.api.nvim_get_hl(0, { name = hl.link })
     end
-    local color_key = (def.color_type == "bg") and "bg" or "fg"
-    fg_color = ("#%06x"):format(src_hl[color_key] or normal_hl[color_key])
+    return hl[color_type] or normal_hl[color_type]
   end
 
+  local fg_color = def.hl_or_color:sub(1, 1) == "#" and def.hl_or_color
+    or ("#%06x"):format(resolve_color(def.hl_or_color, def.color_type))
+
   vim.api.nvim_set_hl(0, hl_name, {
-    bg = (bg_hl.bg ~= nil) and ("#%06x"):format(bg_hl.bg) or normal_hl.bg,
+    bg = bg_hl.bg and ("#%06x"):format(bg_hl.bg) or normal_hl.bg,
     fg = fg_color,
-    bold = def.bold or false,
+    bold = def.bold,
   })
 end
 
@@ -488,7 +491,7 @@ local function get_line_info()
     "▀",
     "▄",
     "▃",
-    "🬭",
+    "▂",
     "▂",
     "▁",
   }

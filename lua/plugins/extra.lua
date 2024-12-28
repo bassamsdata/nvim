@@ -32,7 +32,7 @@ return {
         if vim.w[win].winbar_no_attach then
           -- Re-enable dropbar
           vim.w[win].winbar_no_attach = false
-          vim.wo[win].winbar = "%{%v:lua.dropbar.get_dropbar_str()%}"
+          vim.wo[win].winbar = "%{%v:lua.dropbar()%}"
           vim.notify("Dropbar enabled", vim.log.levels.INFO)
         else
           -- Disable dropbar
